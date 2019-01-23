@@ -77,7 +77,7 @@ export default class MapWithClustering extends Component {
         } else {
           otherChildren.push(marker);
         }
-      } 
+      }
     });
 
     if (!this.superCluster) {
@@ -100,7 +100,7 @@ export default class MapWithClustering extends Component {
   calculateBBox = region => [
     region.longitude - region.longitudeDelta, // westLng - min lng
     region.latitude - region.latitudeDelta, // southLat - min lat
-    region.longitude + region.longitudeDelta , // eastLng - max lng
+    region.longitude + region.longitudeDelta, // eastLng - max lng
     region.latitude + region.latitudeDelta// northLat - max lat
   ];
 
@@ -135,7 +135,9 @@ export default class MapWithClustering extends Component {
       let zoom = this.getBoundsZoomLevel(bBox, { height: h(100), width: w(100) });
       const clusters = await this.superCluster.getClusters([bBox[0], bBox[1], bBox[2], bBox[3]], zoom);
 
-      clusteredMarkers = clusters.map(cluster => (<CustomMarker
+      const CustomDefinedMarker = this.props.customDefinedMarker || CustomMarker
+
+      clusteredMarkers = clusters.map(cluster => (<CustomDefinedMarker
         pointCount={cluster.properties.point_count}
         clusterId={cluster.properties.cluster_id}
         geometry={cluster.geometry}
@@ -202,5 +204,5 @@ MapWithClustering.defaultProps = {
   clusterBorderColor: '#FF5252',
   clusterBorderWidth: 1,
   clusterTextSize: totalSize(2.4),
-  onClusterPress: () => {},
+  onClusterPress: () => { },
 };
