@@ -147,8 +147,6 @@ export default class MapWithClustering extends Component {
         marker={cluster.properties.point_count === 0 ? cluster.marker : null}
         key={JSON.stringify(cluster.geometry) + cluster.properties.cluster_id + cluster.properties.point_count}
         onClusterPress={this.props.onClusterPress}
-        onMarkerRendered={this.props.onMarkerRendered}
-        tracksViewChanges={this.props.tracksViewChanges}
       />));
     } else {
       clusteredMarkers = this.state.markers.map(marker => marker.marker);
